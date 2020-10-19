@@ -36,7 +36,7 @@ impl EventHandler for Handler {
             return
         }
         if KNOWN_USERS.iter().any(|&i| msg.content.contains(i)) {
-            if let Err(why) = msg.react(&ctx.http, serenity::model::channel::ReactionType::Unicode(":hearts:".to_string())).await {
+            if let Err(why) = msg.react(&ctx.http, serenity::model::channel::ReactionType::Unicode("❤️".to_string())).await {
                 println!("Error reacting to message: {:?}", why);
             }
             if let Err(why) = msg.channel_id.say(&ctx.http, generate_msg_ily(&msg.author.name)).await {
