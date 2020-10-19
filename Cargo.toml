@@ -1,0 +1,21 @@
+[package]
+name = "ily"
+version = "0.1.0"
+authors = ["Divy Srivastava <dj.srivastava23@gmail.com>"]
+edition = "2018"
+
+[[bin]]
+path = "main.rs"
+name = "ily"
+
+[dependencies]
+serenity = { version = "0.9.0-rc.2", default-features = false, features = ["builder",
+    "client",
+    "gateway",
+    "http",
+    "model",
+    "utils",
+    "rustls_backend"] }
+dotenv = "0.15.0"
+tokio = { version = "0.2", features = ["macros"] }
+rand = "0.7.3"
