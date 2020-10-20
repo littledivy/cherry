@@ -35,12 +35,14 @@ impl EventHandler for Handler {
         if msg.author.name == "cherry" {
             return
         }
-        if KNOWN_USERS.iter().any(|&i| msg.content.contains(i)) {
-            if let Err(why) = msg.react(&ctx.http, serenity::model::channel::ReactionType::Unicode("❤️".to_string())).await {
-                println!("Error reacting to message: {:?}", why);
-            }
-            if let Err(why) = msg.channel_id.say(&ctx.http, generate_msg_ily(&msg.author.name)).await {
-                println!("Error sending message: {:?}", why);
+        for i in KNOWN_USERS.iter() { 
+            if msg.content.contains(i) {
+                if let Err(why) = msg.react(&ctx.http, serenity::model::channel::ReactionType::Unicode("❤️".to_string())).await {
+                    println!("Error reacting to message: {:?}", why);
+                }
+                if let Err(why) = msg.channel_id.say(&ctx.http, generate_msg_ily(&i)).await {
+                    println!("Error sending message: {:?}", why);
+                }
             }
         }
         if msg.content == "!ily" {
